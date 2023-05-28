@@ -11,5 +11,4 @@ linha do nosso arquivo .csv deve conter: idade, gênero, resposta_1, resposta_2,
 resposta_4, data e hora da resposta
 ⇨O projeto deve ficar solicitando respostas em um laço de repetição que fica inserindo as
 respostas informadas nas linhas do .csv até que a idade de 00 seja informada, então podemos
-ficar inserindo novas respostas por quanto tempo for necessário (quando a idade 00 é informada
-o projeto para de executar).
+ficar inserindo novas respostas por quanto tempo for necessário (quando a idade 00 é inforada  o  projet para de executar).
