@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+
+
+
+# In[2]:
+
+
+import csv
+from datetime import datetime
+
+class Pesquisa:
+    def __init__(self):
+        self.respostas = []
+    
+    def coletar_respostas(self):
+        while True:
+            idade = input("Informe sua idade (ou '00' para sair): ")
+            
+            if idade == '00':
+                break
+            
+            genero = input("Informe seu gênero: ")
+            
+            respostas_perguntas = []
+            for i in range(1, 5):
+                resposta = input(f"Informe a resposta para a pergunta {i}: ")
+                respostas_perguntas.append(resposta)
+            
+            data_hora_resposta = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            
+            self.respostas.append({
+                'idade': idade,
+                'genero': genero,
+                'respostas_perguntas': respostas_perguntas,
+                'data_hora_resposta': data_hora_resposta
+            })
+    
+    def salvar_csv(self):
+        nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados: ")
+        
+        with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+            campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
+            writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
+            writer.writeheader()
+            
+            for resposta in self.respostas:
+                writer.writerow({
+                    'idade': resposta['idade'],
+                    'genero': resposta['genero'],
+                    'resposta_1': resposta['respostas_perguntas'][0],
+                    'resposta_2': resposta['respostas_perguntas'][1],
+                    'resposta_3': resposta['respostas_perguntas'][2],
+                    'resposta_4': resposta['respostas_perguntas'][3],
+                    'data_hora_resposta': resposta['data_hora_resposta']
+                })
+
