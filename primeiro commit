@@ -3,30 +3,52 @@ from datetime import datetime
 
 class Pesquisa:
     def __init__(self):
-        self.respostas = []
+        self.dados_respostas = []
     
+    # Função criada para coletar dados e respostas da pesquisa
     def coletar_respostas(self):
+
+        # Utilizando while para dar segmento na pesquisa até que seja encerrada via o comando solicitado
         while True:
-            idade = input("Informe sua idade (ou '00' para sair): ")
-            
+            print('-'*100)
+            print('\033[33mOlá! Esta é uma pesquisa sobre equilibrio entre vida pessoal e trabalho e saúde mental.')
+            idade = input("\033[0;0mInforme sua idade (ou '00' para sair): ")
+            print('-'*100)
             if idade == '00':
                 break
             
-            genero = input("Informe seu gênero: ")
+            print('-'*100)
+            genero = input("Informe seu gênero\n1 - Feminino\n2 - Masculino\n3 - Transgênero\n4 - Outro\n ")
+            print('-'*100)
+            # Dicionário para guardar os valores correspondetes à pesquisa de gênero, utilizando .get para acessá-lo na entrada 'genero'
+            genero_opcao = {
+                '1': 'Feminino',
+                '2': 'Masculino',
+                '3': 'Transgênero',
+                '4': 'Outro'}.get(genero)
             
-            respostas_perguntas = []
-            for i in range(1, 5):
-                resposta = input(f"Informe a resposta para a pergunta {i}: ")
-                respostas_perguntas.append(resposta)
-            
-            data_hora_resposta = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            
-            self.respostas.append({
-                'idade': idade,
-                'genero': genero,
-                'respostas_perguntas': respostas_perguntas,
-                'data_hora_resposta': data_hora_resposta
-            })
+            # Entradas para coletar as respostas da pesquisa
+            resposta1 = input("A sua empresa oferece suporte adequado à saúde mental dos funcionários?\n1-Sim\n2-Não\n3-Não sei responder\n ")
+            print('-'*100)
+            resposta2 = input("Você ja passou por situações de sobrecarga no seu trabalho?\n1-Sim\n2-Não\n3-Não sei responder\n ")
+            print('-'*100)
+            resposta3 = input("Na empresa em você trabalha existem políticas para promover equilíbrio entre vida pessoal e trabalho?\n1-Sim\n2-Não\n3-Não sei responder\n ")
+            print('-'*100)
+            resposta4 = input("Você acha importante que as empresas adotem políticas/programas de bem-estar para cuidar da saúde\nmental dos seus funcionários?\n1-Sim\n2-Não\n3-Não sei responder\n ")
+            print('-'*100)
+            print('\033[36mObrigado por responder nossa pesquisa!')
+            print('-'*100)
+
+            data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # Dicionário para guardar em forma de valor as entradas pedidas ao usuário
+            respostas = { 
+                          'idade': idade,
+                          'genero': genero_opcao,
+                          'lista_respostas': [resposta1, resposta2, resposta3, resposta4],
+                          'data_hora': data_hora
+                          }
+
+            self.dados_respostas.append(respostas)    
     
     def salvar_csv(self):
         nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados: ")
@@ -36,15 +58,15 @@ class Pesquisa:
             writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
             writer.writeheader()
             
-            for resposta in self.respostas:
+            for resposta in self.dados_respostas:
                 writer.writerow({
                     'idade': resposta['idade'],
                     'genero': resposta['genero'],
-                    'resposta_1': resposta['respostas_perguntas'][0],
-                    'resposta_2': resposta['respostas_perguntas'][1],
-                    'resposta_3': resposta['respostas_perguntas'][2],
-                    'resposta_4': resposta['respostas_perguntas'][3],
-                    'data_hora_resposta': resposta['data_hora_resposta']
+                    'resposta_1': resposta['lista_respostas'][0],
+                    'resposta_2': resposta['lista_respostas'][1],
+                    'resposta_3': resposta['lista_respostas'][2],
+                    'resposta_4': resposta['lista_respostas'][3],
+                    'data_hora_resposta': resposta['data_hora']
                 })
 
 # Execução do programa
