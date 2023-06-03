@@ -63,7 +63,7 @@ class Pesquisa:
             self.dados_respostas.append(respostas)
     
     def salvar_csv(self):
-        nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados: ")
+        nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados (exemplo.csv): ")
         
         with open(nome_arquivo, 'w', newline='') as arquivo_csv:
             campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
