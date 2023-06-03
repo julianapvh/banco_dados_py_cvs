@@ -64,7 +64,7 @@ class Pesquisa:
     
     def salvar_csv(self):
         try:
-            nome_arquivo = input("Informe o nome do arquivo para salvar os dados: ")
+            nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados (exemplo.csv): ")
             
             # Verifica se a extensão .csv está presente no nome do arquivo
             if not nome_arquivo.endswith('.csv'):
