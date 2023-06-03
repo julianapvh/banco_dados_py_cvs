@@ -63,21 +63,37 @@ class Pesquisa:
             self.dados_respostas.append(respostas)
     
     def salvar_csv(self):
-        nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados (exemplo.csv): ")
-        
-        with open(nome_arquivo, 'w', newline='') as arquivo_csv:
-            campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
-            writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
-            writer.writeheader()
+        try:
+            nome_arquivo = input("Informe o nome do arquivo para salvar os dados: ")
             
-            for resposta in self.dados_respostas:
-                writer.writerow({
-                    'idade': resposta['idade'],
-                    'genero': resposta['genero'],
-                    'resposta_1': resposta['lista_respostas'][0],
-                    'resposta_2': resposta['lista_respostas'][1],
-                    'resposta_3': resposta['lista_respostas'][2],
-                    'resposta_4': resposta['lista_respostas'][3],
-                    'data_hora_resposta': resposta['data_hora']
-                })
+            # Verifica se a extensão .csv está presente no nome do arquivo
+            if not nome_arquivo.endswith('.csv'):
+                nome_arquivo += '.csv'
+            
+            with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+                campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
+                writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
+                writer.writeheader()
+                
+                for resposta in self.dados_respostas:
+                    writer.writerow({
+                        'idade': resposta['idade'],
+                        'genero': resposta['genero'],
+                        'resposta_1': resposta['lista_respostas'][0],
+                        'resposta_2': resposta['lista_respostas'][1],
+                        'resposta_3': resposta['lista_respostas'][2],
+                        'resposta_4': resposta['lista_respostas'][3],
+                        'data_hora_resposta': resposta['data_hora']
+                    })
+                
+                print('Os dados foram salvos no arquivo CSV com sucesso!')
+        except IOError:
+            print('Erro ao salvar o arquivo. Verifique o nome e a permissão do diretório.')
+        except Exception as e:
+            print(f'Ocorreu um erro inesperado: {str(e)}')
+
+# Execução do programa
+pesquisa = Pesquisa()
+pesquisa.coletar_respostas()
+pesquisa.salvar_csv()
 
