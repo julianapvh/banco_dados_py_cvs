@@ -23,7 +23,7 @@ class Pesquisa:
         # Utilizando while para dar segmento na pesquisa até que seja encerrada via o comando solicitado
         while True:
             print('-'*100)
-            print('\033[33mOlá! Esta é uma pesquisa sobre equilibrio entre vida pessoal e trabalho e saúde mental.')
+            print('\033[33mOlá! Esta é uma pesquisa sobre equilíbrio entre vida pessoal, trabalho e saúde mental.')
             idade = input("\033[0;0mInforme sua idade (ou '00' para sair): ")
             print('-'*100)
             if idade == '00':
@@ -44,7 +44,7 @@ class Pesquisa:
             print('-'*100)
             resposta2 = input("Você ja passou por situações de sobrecarga no seu trabalho?\n1-Sim\n2-Não\n3-Não sei responder\n ")
             print('-'*100)
-            resposta3 = input("Na empresa em você trabalha existem políticas para promover equilíbrio entre vida pessoal e trabalho?\n1-Sim\n2-Não\n3-Não sei responder\n ")
+            resposta3 = input("Na empresa em que você trabalha existem políticas para promover equilíbrio entre vida pessoal e trabalho?\n1-Sim\n2-Não\n3-Não sei responder\n ")
             print('-'*100)
             resposta4 = input("Você acha importante que as empresas adotem políticas/programas de bem-estar para cuidar da saúde\nmental dos seus funcionários?\n1-Sim\n2-Não\n3-Não sei responder\n ")
             print('-'*100)
