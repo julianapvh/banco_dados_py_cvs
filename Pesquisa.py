@@ -64,7 +64,8 @@ class Pesquisa:
     
     def salvar_csv(self):
         try:
-            nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados (exemplo.csv): ")
+            nome_arquivo = 'pesquisa_saude_trabalho'
+
             
             # Verifica se a extensão .csv está presente no nome do arquivo
             if not nome_arquivo.endswith('.csv'):
@@ -86,11 +87,11 @@ class Pesquisa:
                         'data_hora_resposta': resposta['data_hora']
                     })
                 
-                print('Os dados foram salvos no arquivo CSV com sucesso!')
+                print('\033[32mOs dados foram salvos no arquivo CSV com sucesso!')
         except IOError:
-            print('Erro ao salvar o arquivo. Verifique o nome e a permissão do diretório.')
+            print('\033[41mErro ao salvar o arquivo. Verifique o nome e a permissão do diretório.')
         except Exception as e:
-            print(f'Ocorreu um erro inesperado: {str(e)}')
+            print(f'\033[41mOcorreu um erro inesperado: {str(e)}')
 
 # Execução do programa
 pesquisa = Pesquisa()
