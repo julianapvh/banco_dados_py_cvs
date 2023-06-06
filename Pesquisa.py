@@ -72,33 +72,23 @@ class Pesquisa:
                 print("Opção inválida. Por favor, selecione uma opção válida.")
 
     def salvar_csv(self):
-        try:
-            nome_arquivo = 'pesquisa_saude_trabalho'
-
-            if not nome_arquivo.endswith('.csv'):  # Verifica se o nome do arquivo termina com ".csv"
-                nome_arquivo += '.csv'
-
-            with open(nome_arquivo, 'w', newline='') as arquivo_csv:  # Abre o arquivo CSV para escrita
-                campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
-                writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
-                writer.writeheader()  # Escreve o cabeçalho no arquivo CSV
-
-                for resposta in self.dados_respostas:
-                    writer.writerow({
-                        'idade': resposta['idade'],
-                        'genero': resposta['genero'],
-                        'resposta_1': resposta['lista_respostas'][0],
-                        'resposta_2': resposta['lista_respostas'][1],
-                        'resposta_3': resposta['lista_respostas'][2],
-                        'resposta_4': resposta['lista_respostas'][3],
-                        'data_hora_resposta': resposta['data_hora']
-                    })  # Escreve as respostas no arquivo CSV
-
-            print('\033[32mOs dados foram salvos no arquivo .CSV com sucesso!')
-        except IOError:  # Captura o erro caso ocorra um problema ao salvar o arquivo
-            print('\033[41mErro ao salvar o arquivo. Verifique o nome e a permissão do diretório.')
-        except Exception as e:  # Captura erros inesperados
-            print(f'\033[41mOcorreu um erro inesperado: {str(e)}')
+        nome_arquivo = input("Informe o nome do arquivo CSV para salvar os dados: ")
+        
+        with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+            campos = ['idade', 'genero', 'resposta_1', 'resposta_2', 'resposta_3', 'resposta_4', 'data_hora_resposta']
+            writer = csv.DictWriter(arquivo_csv, fieldnames=campos)
+            writer.writeheader()
+            
+            for resposta in self.dados_respostas:
+                writer.writerow({
+                    'idade': resposta['idade'],
+                    'genero': resposta['genero'],
+                    'resposta_1': resposta['lista_respostas'][0],
+                    'resposta_2': resposta['lista_respostas'][1],
+                    'resposta_3': resposta['lista_respostas'][2],
+                    'resposta_4': resposta['lista_respostas'][3],
+                    'data_hora_resposta': resposta['data_hora']
+                })
 
 # Cria uma instância da classe Pesquisa e executa o fluxo do programa
 pesquisa = Pesquisa()
